@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <h4><span class="glyphicon glyphicon-search"></span> Search</h4>
+
+  <div class="row">
+    <div class="col-md-4">
+      <form role="form">
+        From Date: <input type="date" class="form-control" ng-model="search.fromDate" required>
+        To Date: <input type="date" class="form-control" ng-model="search.toDate" required>
+        Street: <input type="text" ng-model="search.street" class="form-control">
+      </form>
+    </div>
+    <div class="col-md-4">
+      <form role="form">
+        Select Lost Object Category:
+        <select class="form-control" ng-options="cat._id as cat.name for cat in
+           categories" ng-model="search.category" ng-change="loadSubCategory()" required>
+        </select>
+        Select Sub Category:
+        <select class="form-control" ng-options="subCat._id as subCat.name for subCat in
+           subCategories" ng-model="search.subCategory" required>
+        </select>
+        <label class="checkbox-inline" style="margin-top: 10px;">
+          <input type="radio" name="optionsRadiosinline"
+                 ng-value="true" ng-model="search.lost"> Lost
+        </label>
+        <label class="checkbox-inline" style="margin-top: 10px;">
+          <input type="radio" name="optionsRadiosinline"
+                 ng-value="false" ng-model="search.lost"> Found
+        </label>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <form role="form">
+        State:
+        <select class="form-control" ng-options="stat._id as stat.name for stat in
+           states" ng-model="search.state" ng-change="loadCities()" required>
+        </select>
+        City:
+        <select class="form-control" ng-options="cit._id as cit.name for cit in
+           cities" ng-model="search.city" required>
+        </select>
+        <button style="margin-top: 10px;" class="btn btn-primary" ng-click="reset()">Reset</button>
+
+      </form>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-12" style="margin-top: 10px;">
+      <table class="table table-striped" ng-show="search.showTable">
+        <thead>
+        <tr>
+          <th data-checkbox="true">Category</th>
+          <th>SubCategory</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Contact Name</th>
+          <th>Phone Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in allItems | SearchFilter:search">
+          <td>{{item.category.name}}</td>
+          <td>{{item.subCategory.name}}</td>
+          <td>{{item.address}}</td>
+          <td>{{item.state.name}}</td>
+          <td>{{item.city.name}}</td>
+          <td>{{item.contact.name}}</td>
+          <td>{{item.contact.phoneNumber}}</td>
+          <td>
+            <button class="btn btn-primary" ui-sref="foundView({'itemId':item._id})">View</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="alert alert-danger" ng-show="!search.showTable">No Data Found!!!</div>
+</div>
+

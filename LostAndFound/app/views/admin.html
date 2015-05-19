@@ -1,0 +1,95 @@
+<hr>
+<button style="margin-left: 10px; align-content: center;" class="btn btn-warning" data-toggle="modal"
+        data-target="#myModal" ng-hide="isAdmin">Admin Login
+</button>
+</hr></br></br>
+
+<!-- Login Popup Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"
+                data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          Login
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="container">
+            <div class="row">
+
+              <div class="col-sm-6">
+                <form name="userForm" ng-submit="submitForm()" novalidate>
+
+                  <!-- NAME -->
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+                    <label>UserName:</label>
+                    <input type="text" name="username" class="form-control" ng-model="user.username" required>
+
+                    <p ng-show="userForm.username.$invalid && !userForm.username.$pristine" class="help-block">UserName
+                      is required.</p>
+                  </div>
+
+                  <!-- Password -->
+                  <div class="form-group"
+                       ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+                    <label>Password:</label>
+                    <input type="password" name="password" class="form-control" ng-model="user.password" required>
+
+                    <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">Password
+                      is required.</p>
+                  </div>
+                  <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Login</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="col-md-5">
+  <div class="row" style="margin-left: 5px;" ng-show="isAdmin">
+    <form role="form" name="deleteDate">
+      <div class="form-group"
+           ng-class="{ 'has-error' : deleteDate.deleteFrom.$invalid && !deleteDate.deleteFrom.$pristine }">
+        <label><span style="color: red;">*</span>From Date: </label>
+        <input type="date" class="form-control" name="deleteFrom" ng-model="item.fromDate" required>
+
+        <p ng-show="deleteDate.deleteFrom.$invalid && !deleteDate.deleteFrom.$pristine" class="help-block">
+          Please
+          Select Date items to be deleted from.</p>
+      </div>
+
+
+      <div class="form-group"
+           ng-class="{ 'has-error' : deleteDate.deleteDateTo.$invalid && !deleteDate.deleteDateTo.$pristine }">
+        <label><span style="color: red;">*</span>To Date: </label>
+        <input type="date" class="form-control" name="deleteDateTo" ng-model="item.toDate" required>
+
+        <p ng-show="deleteDate.deleteDateTo.$invalid && !deleteDate.deleteDateTo.$pristine" class="help-block">
+          Please
+          Select Date till items to be deleted.</p>
+      </div>
+    </form>
+    <button style="margin-top: 10px;" class="btn btn-danger" ng-disabled="(deleteDate.$invalid)"
+            ng-click="removeItemInfo()"><span
+      class="glyphicon glyphicon-remove"></span> DELETE
+    </button>
+  </div>
+
+</div>
+
+
+
+

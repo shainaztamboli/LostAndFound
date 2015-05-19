@@ -1,0 +1,176 @@
+<div class="container-fluid">
+  <h3><span class="glyphicon glyphicon-hand-up"></span> U Found...</h3>
+
+  <div class="row">
+    <div class="col-md-6">
+      <form role="form" name="FoundItem">
+        <fieldset>
+          <legend>Item Info.</legend>
+
+          <!-- Select Found Object Category -->
+
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundItem.foundCategory.$invalid && !FoundItem.foundCategory.$pristine }">
+            <label><span style="color: red;">*</span>Select Found Object Category: </label>
+            <select class="form-control" name="foundCategory" ng-options="cat._id as cat.name for cat in
+           categories" ng-model="item.category" ng-change="loadSubCategory()" required>
+            </select>
+
+            <p ng-show="FoundItem.foundCategory.$invalid && !FoundItem.foundCategory.$pristine" class="help-block">
+              Please
+              Select Found Object Category.</p>
+          </div>
+
+
+          <!-- Select Found Object Sub Category -->
+
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundItem.foundSubCategory.$invalid && !FoundItem.foundSubCategory.$pristine }">
+            <label><span style="color: red;">*</span>Select Sub Category:</label>
+            <select class="form-control" name="foundSubCategory" ng-options="subCat._id as subCat.name for subCat in
+           subCategories" ng-model="item.subCategory" required>
+            </select>
+
+            <p ng-show="FoundItem.foundSubCategory.$invalid && !FoundItem.foundSubCategory.$pristine"
+               class="help-block">Please
+              Select Found Object Sub Category.</p>
+          </div>
+
+
+          <!-- Found  Date -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundItem.foundDate.$invalid && !FoundItem.foundDate.$pristine }">
+            <label><span style="color: red;">*</span>Found Date: </label>
+            <input type="date" class="form-control" name="foundDate" ng-model="item.date" required>
+
+            <p ng-show="FoundItem.foundDate.$invalid && !FoundItem.foundDate.$pristine" class="help-block">
+              Please
+              Select Found Date.</p>
+          </div>
+          Item Description: <textarea class="form-control" ng-model="item.itemDescription"></textarea>
+        </fieldset>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <form role="form" name="FoundItemLocation">
+        <fieldset>
+          <legend>Item Location Info.</legend>
+          <!-- Address -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundItemLocation.foundAddress.$invalid && !FoundItemLocation.foundAddress.$pristine }">
+            <label><span style="color: red;">*</span>Address:</label>
+            <input type="text" name="foundAddress" class="form-control" ng-model="item.address" required>
+
+            <p ng-show="FoundItemLocation.foundAddress.$invalid && !FoundItemLocation.foundAddress.$pristine"
+               class="help-block">Please Enter
+              Address.</p>
+          </div>
+
+
+          <!-- Street -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundItemLocation.foundStreet.$invalid && !FoundItemLocation.foundStreet.$pristine }">
+            <label><span style="color: red;">*</span>Street:</label>
+            <input type="text" name="foundStreet" class="form-control" ng-model="item.street" required>
+
+            <p ng-show="FoundItemLocation.foundStreet.$invalid && !FoundItemLocation.foundStreet.$pristine"
+               class="help-block">Please Enter
+              Street.</p>
+          </div>
+
+
+          <!-- State -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundItemLocation.foundState.$invalid && !FoundItemLocation.foundState.$pristine }">
+            <label><span style="color: red;">*</span>State:</label>
+            <select class="form-control" name="foundState" ng-options="stat._id as stat.name for stat in
+           states" ng-model="item.state" ng-change="loadCities()" required>
+            </select>
+
+            <p ng-show="FoundItemLocation.foundState.$invalid && !FoundItemLocation.foundState.$pristine"
+               class="help-block">Please Select
+              State.</p>
+          </div>
+
+
+          <!-- City -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundItemLocation.foundCity.$invalid && !FoundItemLocation.foundCity.$pristine }">
+            <label><span style="color: red;">*</span>City:</label>
+            <select class="form-control" name="foundCity" ng-options="cit._id as cit.name for cit in
+           cities" ng-model="item.city" required>
+            </select>
+
+            <p ng-show="FoundItemLocation.foundCity.$invalid && !FoundItemLocation.foundCity.$pristine"
+               class="help-block">
+              Please Select
+              City.</p>
+          </div>
+
+
+          <!-- Pincode -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundItemLocation.foundPinCode.$invalid && !FoundItemLocation.foundPinCode.$pristine }">
+            <label><span style="color: red;">*</span>Pincode:</label>
+            <input type="number" name="foundPinCode" class="form-control" ng-model="item.pincode" ng-minlength="6"
+                   ng-maxlength="6" required>
+
+            <p ng-show="FoundItemLocation.foundPinCode.$invalid && !FoundItemLocation.foundPinCode.$pristine"
+               class="help-block">
+              Please Enter Pincode 6 digit only.</p>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <form name="FoundContactForm" role="form">
+        <fieldset>
+          <legend>Contact Info.</legend>
+          <!--Field Contact Name -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundContactForm.foundContactName.$invalid && !FoundContactForm.foundContactName.$pristine }">
+            <label><span style="color: red;">*</span>Name: </label>
+            <input type="text" name="foundContactName" class="form-control" ng-model="item.contact.name" required>
+
+            <p ng-show="FoundContactForm.foundContactName.$invalid && !FoundContactForm.foundContactName.$pristine"
+               class="help-block">Name
+              is
+              required.</p>
+          </div>
+          <!--Field Phone Number -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundContactForm.foundPhoneNumber.$invalid && !FoundContactForm.foundPhoneNumber.$pristine }">
+            <label><span style="color: red;">*</span>Phone No.: </label>
+            <input type="number" name="foundPhoneNumber" ng-minlength="10" ng-maxlength="10"
+                   class="form-control" ng-model="item.contact.phoneNumber" required>
+
+            <p ng-show="FoundContactForm.foundPhoneNumber.$invalid && !FoundContactForm.foundPhoneNumber.$pristine"
+               class="help-block">Valid
+              Phone
+              No. is required 10 digit only.</p>
+          </div>
+          <!--Field Email -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : FoundContactForm.foundEmail.$invalid && !FoundContactForm.foundEmail.$pristine }">
+            <label><span style="color: red;">*</span>Email: </label>
+            <input type="email" name="foundEmail" class="form-control" ng-model="item.contact.email" required>
+
+            <p ng-show="FoundContactForm.foundEmail.$invalid && !FoundContactForm.foundEmail.$pristine"
+               class="help-block">Valid Email is
+              required.</p>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <br>
+  <button type="reset" class="btn btn-primary" ng-click="reset()">Reset</button>
+  <button type="submit" class="btn btn-primary"
+          ng-disabled="(FoundItem.$invalid && FoundItemLocation.$invalid && FoundContactForm.$invalid)"
+          ng-click="saveItem()">
+    Submit
+  </button>
+  <br><br><br>
+</div>
+

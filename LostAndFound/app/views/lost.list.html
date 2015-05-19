@@ -1,0 +1,39 @@
+<br>
+<div class="container-fluid">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4><span class="glyphicon glyphicon-hand-down"></span> Lost Item List</h4>
+      <input type="text" ng-model="sercahText" placeholder="Search Item">
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Category</th>
+          <th>SubCategory</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Contact Name</th>
+          <th>Phone Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="lost in lostItems | filter : sercahText | orderBy:'-date'">
+          <td>{{lost.date.getDate()+"/"+(lost.date.getMonth()+1)+"/"+lost.date.getFullYear()}}</td>
+          <td>{{lost.category.name}}</td>
+          <td>{{lost.subCategory.name}}</td>
+          <td>{{lost.address}}</td>
+          <td>{{lost.state.name}}</td>
+          <td>{{lost.city.name}}</td>
+          <td>{{lost.contact.name}}</td>
+          <td>{{lost.contact.phoneNumber}}</td>
+          <td><button class="btn btn-primary" ui-sref="lostView({'itemId':lost._id})">View</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

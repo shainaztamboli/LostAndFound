@@ -1,0 +1,164 @@
+<div class="container-fluid">
+  <h3><span class="glyphicon glyphicon-hand-down"></span> U Lost...</h3>
+
+  <div class="row">
+    <div class="col-md-6">
+      <form role="form" name="LostItem">
+        <fieldset>
+          <legend>Item Info.</legend>
+
+          <!-- Select Lost Object Category -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : LostItem.lostCategory.$invalid && !LostItem.lostCategory.$pristine }">
+            <label><span style="color: red;">*</span>Select Lost Object Category:</label>
+            <select class="form-control" name="lostCategory" ng-options="cat._id as cat.name for cat in
+           categories" ng-model="item.category" ng-change="loadSubCategory()" required>
+            </select>
+
+            <p ng-show="LostItem.lostCategory.$invalid && !LostItem.lostCategory.$pristine" class="help-block">Please
+              Select Lost Object Category.</p>
+          </div>
+
+          <!--  Select Sub Category -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : LostItem.lostSubCategory.$invalid && !LostItem.lostSubCategory.$pristine }">
+            <label><span style="color: red;">*</span>Select Sub Category:</label>
+            <select class="form-control" name="lostSubCategory" ng-options="subCat._id as subCat.name for subCat in
+           subCategories" ng-model="item.subCategory" required>
+            </select>
+
+            <p ng-show="LostItem.lostSubCategory.$invalid && !LostItem.lostSubCategory.$pristine" class="help-block">
+              Please
+              Select Sub Category.</p>
+          </div>
+
+          <!--  Lost Date -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : LostItem.lostDate.$invalid && !LostItem.lostDate.$pristine }">
+            <label><span style="color: red;">*</span>Lost Date: </label>
+            <input type="date" class="form-control" name="lostDate" ng-model="item.date" required>
+
+            <p ng-show="LostItem.lostDate.$invalid && !LostItem.lostDate.$pristine" class="help-block">
+              Please
+              Select Lost Date.</p>
+          </div>
+          <div><label>Item Description:</label>
+            <textarea class="form-control" ng-model="item.itemDescription"></textarea>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <form role="form" name="LostItemLocation">
+        <fieldset>
+          <legend>Item Location Info.</legend>
+          <!-- Address -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : LostItemLocation.lostAddress.$invalid && !LostItemLocation.lostAddress.$pristine }">
+            <label><span style="color: red;">*</span>Address:</label>
+            <input type="text" name="lostAddress" class="form-control" ng-model="item.address" required>
+
+            <p ng-show="LostItemLocation.lostAddress.$invalid && !LostItemLocation.lostAddress.$pristine"
+               class="help-block">Please Enter
+              Address.</p>
+          </div>
+
+          <!-- Street -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : LostItemLocation.lostStreet.$invalid && !LostItemLocation.lostStreet.$pristine }">
+            <label><span style="color: red;">*</span>Street:</label>
+            <input type="text" name="lostStreet" class="form-control" ng-model="item.street" required>
+
+            <p ng-show="LostItemLocation.lostStreet.$invalid && !LostItemLocation.lostStreet.$pristine"
+               class="help-block">Please Enter
+              Street.</p>
+          </div>
+
+          <!-- State -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : LostItemLocation.lostState.$invalid && !LostItemLocation.lostState.$pristine }">
+            <label><span style="color: red;">*</span>State:</label>
+            <select class="form-control" name="lostState" ng-options="stat._id as stat.name for stat in
+           states" ng-model="item.state" ng-change="loadCities()" required>
+            </select>
+
+            <p ng-show="LostItemLocation.lostState.$invalid && !LostItemLocation.lostState.$pristine"
+               class="help-block">Please Select
+              State.</p>
+          </div>
+
+          <!-- City -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : LostItemLocation.lostCity.$invalid && !LostItemLocation.lostCity.$pristine }">
+            <label><span style="color: red;">*</span>City:</label>
+            <select class="form-control" name="lostCity" ng-options="cit._id as cit.name for cit in
+           cities" ng-model="item.city" required>
+            </select>
+
+            <p ng-show="LostItemLocation.lostCity.$invalid && !LostItemLocation.lostCity.$pristine" class="help-block">
+              Please Select
+              City.</p>
+          </div>
+
+          <!-- Pincode -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : LostItemLocation.lostPinCode.$invalid && !LostItemLocation.lostPinCode.$pristine }">
+            <label><span style="color: red;">*</span>Pincode:</label>
+            <input type="number" name="lostPinCode" class="form-control" ng-model="item.pincode" ng-minlength="6"
+                   ng-maxlength="6" required>
+
+            <p ng-show="LostItemLocation.lostPinCode.$invalid && !LostItemLocation.lostPinCode.$pristine"
+               class="help-block">
+              Please Enter Pincode 6 digit only.</p>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <form name="contactForm" role="form">
+        <fieldset>
+          <legend>Contact Info.</legend>
+          <!--Field Contact Name -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : contactForm.contactName.$invalid && !contactForm.contactName.$pristine }">
+            <label><span style="color: red;">*</span>Name: </label>
+            <input type="text" name="contactName" class="form-control" ng-model="item.contact.name" required>
+
+            <p ng-show="contactForm.contactName.$invalid && !contactForm.contactName.$pristine" class="help-block">Name
+              is
+              required.</p>
+          </div>
+          <!--Field Phone Number -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : contactForm.phoneNumber.$invalid && !contactForm.phoneNumber.$pristine }">
+            <label><span style="color: red;">*</span>Phone No.: </label>
+            <input type="number" name="phoneNumber" ng-minlength="10" ng-maxlength="10"
+                   class="form-control" ng-model="item.contact.phoneNumber" required>
+
+            <p ng-show="contactForm.phoneNumber.$invalid && !contactForm.phoneNumber.$pristine" class="help-block">Valid
+              Phone
+              No. is required 10 digit only.</p>
+          </div>
+          <!--Field Email -->
+          <div class="form-group"
+               ng-class="{ 'has-error' : contactForm.email.$invalid && !contactForm.email.$pristine }">
+            <label><span style="color: red;">*</span>Email: </label>
+            <input type="email" name="email" class="form-control" ng-model="item.contact.email" required>
+
+            <p ng-show="contactForm.email.$invalid && !contactForm.email.$pristine" class="help-block">Valid Email is
+              required.</p>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <br>
+  <button type="reset" class="btn btn-primary" ng-click="reset()">Reset</button>
+  <button type="submit" class="btn btn-primary"
+          ng-disabled="(LostItem.$invalid && LostItemLocation.$invalid && contactForm.$invalid)" ng-click="saveItem()">
+    Submit
+  </button>
+  <br><br><br>
+</div>

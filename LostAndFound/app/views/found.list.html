@@ -1,0 +1,39 @@
+<br>
+<div class="container-fluid">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4><span class="glyphicon glyphicon-hand-up"></span> Found Item List</h4>
+      <input type="text" ng-model="sercahText" placeholder="Search Item">
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Found Date</th>
+          <th>Category</th>
+          <th>SubCategory</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Contact Name</th>
+          <th>Phone Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="found in foundItems | filter : sercahText | orderBy: '-date'">
+          <td>{{found.date.getDate()+"/"+(found.date.getMonth()+1)+"/"+found.date.getFullYear()}}</td>
+          <td>{{found.category.name}}</td>
+          <td>{{found.subCategory.name}}</td>
+          <td>{{found.address}}</td>
+          <td>{{found.state.name}}</td>
+          <td>{{found.city.name}}</td>
+          <td>{{found.contact.name}}</td>
+          <td>{{found.contact.phoneNumber}}</td>
+          <td><button class="btn btn-primary" ui-sref="foundView({'itemId':found._id})">View</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
